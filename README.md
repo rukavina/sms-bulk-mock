@@ -32,3 +32,12 @@ php script/bulk-app.php
 
 and then navigate to your page in `public/index.html`
 
+## API
+
+This tool provides an API to manage stored messages at url `public/rest.php`. These are the endpoints:
+
+* GET */messages* get all json messages, eg. `public/rest.php/messages`
+* GET */messages/:id* get particular message id
+* DELETE */messages* delete all stored messages
+* DELETE */messages/:id* delete particular message by id 
+
