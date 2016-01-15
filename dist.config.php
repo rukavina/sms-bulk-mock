@@ -10,5 +10,8 @@ return array(
     'client'    => array(
         'log_file'  => 'data/log/client.log',
     ),
+    'bulk_server' =>array(
+        'port' => 8080
+    ),    
 );
 
