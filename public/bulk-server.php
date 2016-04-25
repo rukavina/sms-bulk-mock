@@ -60,7 +60,7 @@ if(!isset($_REQUEST['dlr-url'])){
     return;
 }
 
-$dlrUrl = urldecode($_REQUEST['dlr-url']);
+$dlrUrl = $_REQUEST['dlr-url'];
 
 $log->info("Sending DRL to url: [$dlrUrl]");
 
