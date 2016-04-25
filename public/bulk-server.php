@@ -3,6 +3,8 @@
 use Predis\Client as PredisClient;
 use GuzzleHttp\Client as HttpClient;
 use BulkMock\Utils as BulkUtils;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 CONST BULK_COUNTER = 'bulk_num';
 CONST BULK_HASH = 'bulk_hash';
@@ -10,8 +12,13 @@ CONST BULK_HASH = 'bulk_hash';
 require dirname(__DIR__) . '/vendor/autoload.php';
 $config = require dirname(__DIR__) . '/config.php';
 
+// create a log channel
+$log = new Logger('serverlog');
+$log->pushHandler(new StreamHandler(dirname(__DIR__) . '/' . $config['client']['log_file']));
+
 //get params
 if(!$_REQUEST['sender'] || !$_REQUEST['receiver'] || !$_REQUEST['text']){
+    $log->error('Invalid request');
     header("HTTP/1.1 420 OK");
     die("ERR 110");
 }
@@ -40,6 +47,8 @@ ob_start();
 header("HTTP/1.1 202 OK");
 echo "OK $messageId $smsParts";
 
+$log->info("Valid request and replied: OK $messageId $smsParts");
+
 header('Connection: close');
 header('Content-Length: '.ob_get_length());
 ob_end_flush();
@@ -52,6 +61,8 @@ if(!isset($_REQUEST['dlr-url'])){
 }
 
 $dlrUrl = $_REQUEST['dlr-url'];
+
+$log->info("Sending DRL to url: [$dlrUrl]");
 
 $httpClient = new HttpClient();
 
