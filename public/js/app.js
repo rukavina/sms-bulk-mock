@@ -35,7 +35,7 @@ var app = {
                     break;
                 case 'bulk_msg':
                     toastr.success('BULK success');
-                    $('#received').prepend('<tr><td>' + msg.data.sender + '</td><td>' + msg.data.receiver + '</td><td>' + msg.data.text + '</td></tr>');
+                    $('#received').prepend('<tr><td>' + msg.data.sender + '</td><td>' + msg.data.receiver + '</td><td>' + self.nl2br(msg.data.text) + '</td></tr>');
                     self.logData(msg.data);
                     break;                    
             }                        
@@ -68,7 +68,10 @@ var app = {
         for(var key in data){
             self.logLine(key + ": " + data[key]);
         };        
-    }
+    },
+    nl2br: function(text){
+        return text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    }    
     
 };
         

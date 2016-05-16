@@ -80,7 +80,7 @@
         
         <script>
             $(document).ready(function(){
-                var bulkUrl = window.location + '/bulk-server.php?type=text&user=testuser&password=testpass&sender=Bulk+Test&receiver=%2B4178123456&dcs=GSM&text=This+is+test+message&dlr-mask=19';
+                var bulkUrl = window.location + '/bulk-server.php?type=text&user=testuser&password=testpass&sender=Bulk+Test&receiver=%2B4178123456&dcs=GSM&text=This+is+test+message%0Asecond+line&dlr-mask=19';
                 var restUrl = window.location + '/rest.php/messages';
                 
                 $("#bulktesturl").attr('href', bulkUrl);
